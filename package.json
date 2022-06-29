@@ -1,0 +1,23 @@
+{
+  "name": "v",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/officialsahoo/v.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/officialsahoo/v/issues"
+  },
+  "homepage": "https://github.com/officialsahoo/v#readme",
+  "dependencies": {
+    "mongoose": "^6.4.0"
+  }
+}
