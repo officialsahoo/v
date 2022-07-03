@@ -82,7 +82,39 @@ const createuser = async()=>{
 }
 // For inserting multiple user
 
-createuser()
+//Call below function for adding new document to collection
+// createuser();
+
+
+const getDocument = async()=>{
+    //----------------Without try catch-------------------------
+    // const result = await User.find();
+    // const result = await User.find({age:26});
+    // const result = await User.find({age:26}).select({name:1,age:1,mob:1});
+    // const result = await User.find({age:26}).select({name:1,age:1,mob:1}).limit(1);
+    // console.log(result);
+    //---------------With try catch-------------------------
+    try{
+        // const result = await User
+        // .find( {age: {$lte:50} } ) //comparison operator
+        // .select({name:1,age:1,mob:1});
+
+        // const result = await User.find({name: {$in:["DEF", "GHI"] } }).select({name:1,age:1,mob:1});
+
+        // NOTE: Comparison and logical operator are different. For ex you use comparison operator then on the field comarison operator being added it will check that and if thet field missing then that document will not come.
+        // But in case of logical operator if the field missing then that document will come
+
+        // const result = await User.find({age: {$lte:38} }).select({name:1,age:1,mob:1});
+        // const result = await User.find({age: {$not: {$gte:38}} }).select({name:1,age:1,mob:1});
+        const result = await User.find().select({name:1}).sort({name:-1}); //For sorting 1:ascending,2:Descending
+
+        console.log(result);
+    }catch(err){
+        console.log(err);
+    }
+}
+
+getDocument();
 
 
 
