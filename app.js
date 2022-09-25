@@ -9,7 +9,8 @@ mongoose.connect("mongodb://localhost:27017/test", {useNewUrlParser:true, useUni
 const userSchema = new mongoose.Schema({
     name:{
         type:String,
-        required:true
+        required:true,
+        lowercase:true
     },
     age:Number,
     mob:Number,
@@ -50,25 +51,25 @@ const User = new mongoose.model("User", userSchema);
 const createuser = async()=>{
     try{
         const user1 = new User({
-            name:"MNO",
+            name:"JKL",
             age:36,
             mob:8596201254,
             active:true
         })
         const user2 = new User({
-            name:"PQR",
+            name:"MNO",
             age:20,
             mob:9856320214,
             active:true
         })
         const user3 = new User({
-            name:"STU",
+            name:"PQR",
             age:99,
             mob:8952021478,
             active:true
         })
         const user4 = new User({
-            name:"VWX",
+            name:"STUu",
             age:88,
             mob:2562369856,
             active:true
@@ -83,9 +84,10 @@ const createuser = async()=>{
 // For inserting multiple user
 
 //Call below function for adding new document to collection
-// createuser();
+createuser();
 
 
+// Fetching Document Start
 const getDocument = async()=>{
     //----------------Without try catch-------------------------
     // const result = await User.find();
@@ -114,8 +116,55 @@ const getDocument = async()=>{
     }
 }
 
-getDocument();
+// getDocument();
+// Fetching Document End
 
+
+// Update Document Start
+const updateDocument = async (id)=>{
+    try{
+        // --1.Way -------------------------------------------
+        // const result = await User.updateOne({_id:id},{
+        //     $set:{
+        //         name:"DEF"
+        //      }
+        // });
+
+        // Another way--------------------------------------
+        const result = await User.findByIdAndUpdate({_id:id},{
+            $set:{
+                name:"GHI"
+             }
+        },
+        {
+            new:true, //This will show the new updated result else the old data which was updated will show(Optional field)
+            useFindAndModify:false //This will not show the deprication warning(While using findByIdAndUpdate rather update, without thid option a deprication message will show)
+        }
+        );
+
+
+        console.log(result);
+    }catch(err){
+        console.log(err);
+    }
+    
+}
+
+// updateDocument("62c1126cb198cc106f9f9698"); //Passing the id
+// Update Document End
+
+
+// Delete document start
+const deleteDocument = async(_id)=>{
+    try{
+        const result = await User.deleteOne({_id});
+        console.log(result);
+    } catch(err){
+        console.log(err);
+    }
+}
+// deleteDocument("62c1126cb198cc106f9f969a");
+// Delete document end
 
 
 
